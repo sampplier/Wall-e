@@ -1,0 +1,40 @@
+#define sensor1 2
+#define sensor2 7
+#define motor1F 6
+#define motor1R 9
+#define motor2F 10
+#define motor2R 11
+void setup(){
+    pinMode(sensor1, INPUT);
+    pinMode(sensor2, INPUT);
+    pinMode(motor1F, OUTPUT);
+    pinMode(motor1R, OUTPUT);
+    pinMode(motor2F, OUTPUT);
+    pinMode(motor2R, OUTPUT);
+}
+void loop(){
+    delay(30);
+    int speed = 120;
+    int sensor1ST = digitalRead(sensor1);
+    int sensor2ST = digitalRead(sensor2);
+    if (sensor1ST == 1 and sensor2ST == 1 or sensor1ST ==0 and sensor2ST ==0){
+        delay(200);
+        analogWrite(motor1F, speed);
+        analogWrite(motor2F, speed);
+        analogWrite(motor1R, 0);
+        analogWrite(motor2R, 0);
+    }else if (sensor1ST ==0){
+        analogWrite(motor2F, speed);
+        analogWrite(motor1R, speed);
+        analogWrite(motor1F, 0);
+        analogWrite(motor2R, 0);
+        delay(10);
+    }else if (sensor2ST ==0){
+        analogWrite(motor1F, speed);
+        analogWrite(motor2R, speed);
+        analogWrite(motor1R, 0);
+        analogWrite(motor2F, 0);
+        delay(10);
+    }
+    delay(30);
+}
